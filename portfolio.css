@@ -1106,6 +1106,86 @@ section {
     backdrop-filter: blur(10px);
 }
 
+/* Markdown styles within bot messages */
+.bot-message h1, .bot-message h2, .bot-message h3, .bot-message h4, .bot-message h5, .bot-message h6 {
+    color: var(--fun-color);
+    margin: 0.5rem 0;
+    font-weight: 600;
+}
+
+.bot-message h1 { font-size: 1.3rem; }
+.bot-message h2 { font-size: 1.2rem; }
+.bot-message h3 { font-size: 1.1rem; }
+.bot-message h4, .bot-message h5, .bot-message h6 { font-size: 1rem; }
+
+.bot-message p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.bot-message ul, .bot-message ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.bot-message li {
+    margin: 0.3rem 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.bot-message strong {
+    color: white;
+    font-weight: 600;
+}
+
+.bot-message em {
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+.bot-message code {
+    background: rgba(78, 205, 196, 0.2);
+    color: var(--fun-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+}
+
+.bot-message pre {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(78, 205, 196, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    overflow-x: auto;
+}
+
+.bot-message pre code {
+    background: none;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.bot-message a {
+    color: var(--fun-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.bot-message a:hover {
+    border-bottom-color: var(--fun-color);
+}
+
+.bot-message blockquote {
+    border-left: 3px solid var(--fun-color);
+    padding-left: 1rem;
+    margin: 0.5rem 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
 .user-message {
     background: var(--gradient);
     color: white;

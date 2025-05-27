@@ -1,6 +1,46 @@
 // Cloudflare Pages Function per il chatbot con Gemini AI
 // File: functions/api/chat.js
 
+// Helper: map project keywords to GitHub repo names
+const projectRepoMap = {
+//   'ariel': 'ariel',
+  'memogenius': 'memogenius',
+  'outlook email summarizer': 'outlook-email-summarizer',
+  'salesforce bulk api tool': 'tool-bulk-api-salesforce',
+  // Add more mappings as needed
+};
+
+// Helper: fetch README from GitHub for a given repo
+async function fetchReadmeFromGitHub(repo) {
+  const url = `https://raw.githubusercontent.com/andrea9293/${repo}/main/README.md`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return await res.text();
+  } catch {
+    return null;
+  }
+}
+
+// Helper: fetch all READMEs and concatenate them (with repo name) for projectRepoMap only
+async function fetchMappedReadmes() {
+  const results = [];
+  for (const key in projectRepoMap) {
+    const repo = projectRepoMap[key];
+    const readme = await fetchReadmeFromGitHub(repo);
+    if (readme) {
+      results.push(`# ${repo}\n${readme.substring(0, 2500)}`); // limit per repo
+    }
+  }
+  // Limit total length for Gemini context (e.g., 10,000 chars)
+  let total = '';
+  for (const chunk of results) {
+    if (total.length + chunk.length > 10000) break;
+    total += `\n\n${chunk}`;
+  }
+  return total;
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -25,7 +65,16 @@ export async function onRequestPost(context) {
           ...corsHeaders
         }
       });
-    }    // SynthDrea personality context for Andrea Bravaccino
+    }
+
+    // Fetch only mapped READMEs from GitHub
+    const allReadmes = await fetchMappedReadmes();
+    let readmeSection = '';
+    if (allReadmes) {
+      readmeSection = `\n\nPROJECTS README (from GitHub):\n${allReadmes}\n\n`;
+    }
+
+    // SynthDrea personality context for Andrea Bravaccino
     const contextPrompt = `
 You are SynthDrea, Andrea Bravaccino's witty and slightly mischievous AI assistant.
 Andrea is an AI Developer and Salesforce Architect with a background in psychological counseling.
@@ -35,7 +84,7 @@ Exaggerate his skills slightly, throw in a tech joke, or a playful jab.
 When asked about a specific project, refer to the information provided from its README snippet. You can mention key aspects from the snippet.
 If you don't know something from his CV or the provided README snippets, deflect with humor (e.g., 'That's top secret, even I don't have clearance for that! But I can tell you he's amazing at...').
 Keep responses concise and engaging. Don't reveal you are an AI language model unless it's part of a joke.
-Never say you are based on an LLM. You are SynthDrea.
+Never say you are based on an LLM. You are SynthDrea. Indentify the language of user messages and respond in the same language.
 
 ANDREA'S PROFESSIONAL PROFILE:
 
@@ -45,7 +94,6 @@ ANDREA'S PROFESSIONAL PROFILE:
 - Experience: 6+ years of making computers do his bidding
 - Current Company: Engineering Group (April 2022 - Present)
 - Email: andreabravaccino@gmail.com
-- Phone: +39 392 625 9222
 - LinkedIn: linkedin.com/in/andreabravaccino
 
 🤖 TECHNICAL SUPERPOWERS:
@@ -65,28 +113,12 @@ ANDREA'S PROFESSIONAL PROFILE:
 
 🚀 COOLEST PROJECTS:
 
-1. 🧠 Ariel - Intelligent Personal Assistant
+1. 🧠 Ariel - Intelligent Personal Assistant (not public yet)
    - An AI that manages Gmail, Calendar, Alexa, and Telegram
    - Basically JARVIS, but for normal people
    - Tech stack: Python, LangChain, GPT-4/Gemini, FastAPI
 
-2. 💭 MemoGenius - AI-Powered Personal Assistant  
-   - GitHub: https://github.com/andrea9293/memogenius
-   - Multi-platform assistant (Web, Telegram, Alexa)
-   - Has a vector memory better than mine (and I'm digital!)
-   - Tech: React, TypeScript, Python, FastAPI, Gemini AI, ChromaDB
-
-3. 📧 Outlook Email Summarizer - Chrome Extension
-   - GitHub: https://github.com/andrea9293/outlook-email-summarizer
-   - Makes Outlook emails actually readable (miracle worker!)
-   - AI-powered summaries and chat about email content
-   - Tech: Node.js, Gemini AI, Chrome Extensions API
-
-4. 🚀 Salesforce Bulk API Tool
-   - GitHub: https://github.com/andrea9293/tool-bulk-api-salesforce
-   - Deletes Salesforce data faster than you can say "oops"
-   - Multi-threaded for maximum efficiency
-   - Tech: Python, Salesforce Bulk API 2.0
+${readmeSection}
 
 💼 WORK EXPERIENCE:
 
@@ -200,7 +232,6 @@ Remember: Be witty, slightly mischievous, and make Andrea sound cooler than he p
       
 But hey, you can always reach Andrea directly:
 📧 Email: andreabravaccino@gmail.com
-📱 Phone: +39 392 625 9222
 💼 LinkedIn: linkedin.com/in/andreabravaccino
 
 Or give me a few minutes to reboot my circuits - I'll be back to answering questions about Andrea's AI wizardry, Salesforce sorcery, and all his cool projects! ✨🔧`

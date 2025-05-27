@@ -249,11 +249,26 @@ function initChatbot() {
             addMessage('Mi dispiace, al momento non riesco a rispondere. Riprova più tardi o contatta Andrea direttamente!', 'bot');
         }
     }
-    
-    function addMessage(text, sender) {
+      function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', `${sender}-message`);
-        messageDiv.textContent = text;
+        
+        // If it's a bot message, parse markdown, otherwise keep text as is
+        if (sender === 'bot') {
+            // Configure marked options for security and styling
+            marked.setOptions({
+                breaks: true,      // Convert line breaks to <br>
+                gfm: true,         // GitHub Flavored Markdown
+                sanitize: false,   // We trust our own content
+                smartypants: true  // Smart quotes and typography
+            });
+            
+            // Parse markdown and set as innerHTML
+            messageDiv.innerHTML = marked.parse(text);
+        } else {
+            // For user messages, keep as plain text
+            messageDiv.textContent = text;
+        }
         
         chatbotMessages.appendChild(messageDiv);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
