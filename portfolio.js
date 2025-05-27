@@ -294,46 +294,6 @@ function initChatbot() {
             typingIndicator.remove();
         }
     }
-    
-    function generateResponse(message) {
-        const lowerMessage = message.toLowerCase();
-        
-        // Simple keyword-based responses (in production, this would use Gemini API)
-        if (lowerMessage.includes('progetti') || lowerMessage.includes('project')) {
-            return 'Andrea ha sviluppato diversi progetti interessanti! Il più avanzato è Ariel, un assistente AI che integra LangChain, GPT-4 e servizi Google. C\'è anche MemoGenius, un assistente multi-piattaforma con memoria vettoriale. Vuoi sapere di più su qualche progetto specifico?';
-        }
-        
-        if (lowerMessage.includes('competenze') || lowerMessage.includes('skill') || lowerMessage.includes('tecnologie')) {
-            return 'Andrea è specializzato in AI (LLM, RAG, Prompt Engineering), sviluppo Python/TypeScript, e architetture Salesforce. Ha tutte le certificazioni Salesforce Architect e lavora con tecnologie come LangChain, FastAPI, e CrewAI. Su cosa vorresti sapere di più?';
-        }
-        
-        if (lowerMessage.includes('esperienza') || lowerMessage.includes('lavoro') || lowerMessage.includes('carriera')) {
-            return 'Andrea ha oltre 6 anni di esperienza. Attualmente è AI Developer e Salesforce Architect in Engineering Group, dove sviluppa agenti AI e soluzioni CRM enterprise. Ha lavorato anche in Indra e Enigen Italia (NTT Data). Vuoi dettagli su qualche ruolo specifico?';
-        }
-        
-        if (lowerMessage.includes('ariel')) {
-            return 'Ariel è un assistente AI avanzato che Andrea ha sviluppato usando LangChain e GPT-4. Integra Gmail, Google Calendar, Alexa e Telegram per gestire intelligentemente promemoria, email ed eventi. È supportato da un backend FastAPI robusto!';
-        }
-        
-        if (lowerMessage.includes('memogenius')) {
-            return 'MemoGenius è un assistente personale intelligente multi-piattaforma (Web, Telegram, Alexa) che usa Google Gemini per NLP. Ha un frontend React, backend Python FastAPI e usa ChromaDB per la memoria vettoriale. Puoi trovarlo su GitHub!';
-        }
-        
-        if (lowerMessage.includes('salesforce')) {
-            return 'Andrea è un Salesforce Architect certificato con tutte le certificazioni principali: Application, System, Integration, Data, Sharing and Visibility, e Development Lifecycle Architect. Sviluppa soluzioni enterprise complesse usando Apex, LWC e Flows.';
-        }
-        
-        if (lowerMessage.includes('contatt') || lowerMessage.includes('email') || lowerMessage.includes('telefono')) {
-            return 'Puoi contattare Andrea via email: andreabravaccino@gmail.com, telefono: +39 392 625 9222, o su LinkedIn: linkedin.com/in/andreabravaccino. È sempre disponibile per discutere progetti interessanti!';
-        }
-        
-        if (lowerMessage.includes('ciao') || lowerMessage.includes('salve') || lowerMessage.includes('hello')) {
-            return 'Ciao! È un piacere parlare con te. Sono l\'AI di Andrea e posso rispondere a qualsiasi domanda sui suoi progetti, competenze tecniche, o esperienza lavorativa. Cosa ti interessa sapere?';
-        }
-        
-        // Default response
-        return 'Interessante domanda! Ti posso parlare dei progetti di Andrea (Ariel, MemoGenius, etc.), delle sue competenze in AI e Salesforce, o della sua esperienza lavorativa. Su cosa vorresti sapere di più?';
-    }
 }
 
 // Preloader

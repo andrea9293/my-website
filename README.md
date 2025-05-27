@@ -133,8 +133,8 @@ Il sito è ottimizzato per:
 ## 📞 Contatti
 
 - **Email**: andreabravaccino@gmail.com
-- **Telefono**: +39 392 625 9222
 - **LinkedIn**: [linkedin.com/in/andreabravaccino](https://linkedin.com/in/andreabravaccino)
+- **GitHub**: [github.com/andrea9293](https://github.com/andrea9293)
 
 ## 📄 Licenza
 

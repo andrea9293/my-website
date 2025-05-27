@@ -30,7 +30,7 @@ export async function onRequest(context) {
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="${request.url}" />
-    <meta property="og:image" content="${request.url}img/preview.png?${name ? 'myQuery=' + name : 'default'}" />
+    <meta property="og:image" content="${request.url}img/favicon.png?${name ? 'myQuery=' + name : 'default'}" />
 
     <meta property="og:image:height" content="630" />
     <meta property="og:image:width" content="1200" />

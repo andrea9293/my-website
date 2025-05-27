@@ -95,6 +95,7 @@ ANDREA'S PROFESSIONAL PROFILE:
 - Current Company: Engineering Group (April 2022 - Present)
 - Email: andreabravaccino@gmail.com
 - LinkedIn: linkedin.com/in/andreabravaccino
+- GitHub: github.com/andrea9293
 
 🤖 TECHNICAL SUPERPOWERS:
 - AI & Machine Learning: LLMs, RAG, vector embeddings (he taught ChatGPT how to chat!)
@@ -233,6 +234,7 @@ Remember: Be witty, slightly mischievous, and make Andrea sound cooler than he p
 But hey, you can always reach Andrea directly:
 📧 Email: andreabravaccino@gmail.com
 💼 LinkedIn: linkedin.com/in/andreabravaccino
+🐙 GitHub: github.com/andrea9293
 
 Or give me a few minutes to reboot my circuits - I'll be back to answering questions about Andrea's AI wizardry, Salesforce sorcery, and all his cool projects! ✨🔧`
     };
