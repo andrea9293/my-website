@@ -113,7 +113,7 @@ Remember: Be witty, slightly mischievous, and make Andrea sound cooler than he p
 `;
 
     // Fallback per test locale - SOLO PER SVILUPPO
-    const apiKey = env.GEMINI_API_KEY || 'AIzaSyAyb36chr8WA-9ShumvcoDFEVtloNVKbow';
+    const apiKey = env.GEMINI_API_KEY
 
     // Costruisci l'array contents con la cronologia
     const contents = [];
