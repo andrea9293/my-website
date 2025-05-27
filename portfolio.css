@@ -336,11 +336,8 @@ html {
     z-index: 2;
 }
 
-.scroll-down {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.5rem;
-    animation: bounce 2s infinite;
-    text-decoration: none;
+.container {
+    padding-top: 14vh;
 }
 
 @keyframes bounce {
