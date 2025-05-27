@@ -1,72 +1,145 @@
-# cloudflare-pages-template
+# Portfolio Andrea Bravaccino
 
-Get started with [Cloudflare Pages](https://pages.cloudflare.com/) by deploying this pretty template on your own account, and start playing around.
+Portfolio professionale moderno per Andrea Bravaccino - AI Developer & Salesforce Architect.
 
-## Step 1
+## 🚀 Caratteristiche
 
-Clone this Repository to your own GitHub account. 
+- **Design Moderno**: Interface pulita e professionale con animazioni fluide
+- **Chatbot AI**: Integrato con Google Gemini per rispondere a domande sui progetti e competenze
+- **Responsive**: Ottimizzato per tutti i dispositivi
+- **Performance**: Ottimizzato per Cloudflare Pages con caricamento veloce
+- **SEO Friendly**: Meta tag ottimizzati per i motori di ricerca
 
-Or download this Repository as a ZIP file by clicking the green button that says "<> Code" and clicking "Download ZIP", then extract the contents to a new folder, and upload the content (and only the content; not the folder) of that folder to a new GitHub Repository.
+## 🛠️ Tecnologie Utilizzate
 
-## Step 2
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Framework CSS**: Bootstrap 5
+- **Animazioni**: CSS Animations + Intersection Observer API
+- **Backend**: Cloudflare Pages Functions
+- **AI**: Google Gemini API
+- **Hosting**: Cloudflare Pages
 
-Access your _free_ Cloudflare account ([new to Cloudflare?](https://developers.cloudflare.com/fundamentals/get-started/)), and go to the Pages tab.
+## 📦 Configurazione
 
-![pages-tab](/img/readme-img/pages-tab.png)
+### 1. Collegamento a Cloudflare Pages
 
-## Step 3
+1. Collega il tuo repository GitHub a Cloudflare Pages
+2. Imposta build command: `none` (sito statico)
+3. Imposta output directory: `/` (file nella root)
+4. Deploy!
 
-Go to your Cloudflare Dashboard. Click on the blue "Create a project" button, and select "Connect to Git".
+### 2. Configura le variabili d'ambiente
 
-## Step 4
+Nel dashboard di Cloudflare Pages:
 
-Connect your GitHub account, select your Repository, and click "Begin setup".
+1. Vai alla sezione **Settings** del tuo progetto
+2. Trova la sezione **Environment variables**
+3. Aggiungi la seguente variabile:
 
-![github-deploy](/img/readme-img/github-deploy.png)
+```
+GEMINI_API_KEY=your_google_gemini_api_key_here
+```
 
-## Step 5
+### 3. Ottieni la chiave API di Google Gemini
 
-If you want, you can update some content, including the [index.html](index.html).
+1. Vai su [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Crea un nuovo progetto o seleziona uno esistente
+3. Genera una nuova API key
+4. Copia la chiave e aggiungila alle variabili d'ambiente di Cloudflare
 
-You might want to update the following files with your own parameters:
-- [robots.txt](robots.txt)
-- [sitemap.xml](sitemap.xml)
+## 🤖 Chatbot
 
-## Step 6
+Il chatbot utilizza Google Gemini AI ed è configurato con informazioni dettagliate su:
 
-Just hit "Save and Deploy" and let the magic happen! ✨
+- **Competenze tecniche**: AI, LLM, Salesforce, Python, TypeScript
+- **Progetti personali**: Ariel, MemoGenius, Outlook Summarizer, Bulk API Tool
+- **Esperienza lavorativa**: Engineering Group, Indra, Enigen Italia
+- **Certificazioni**: Tutte le certificazioni Salesforce Architect
+- **Contatti**: Email, telefono, LinkedIn
 
-![success](/img/readme-img/success.png)
 
-## Step 7
+## 📁 Struttura del Progetto
 
-Share your beautiful website with the world. 🤓
+```
+my-website/
+├── index.html              # Pagina principale
+├── portfolio.css           # Stili custom
+├── portfolio.js            # JavaScript principale
+├── functions/
+│   ├── _middleware.js      # Middleware Cloudflare
+│   └── api/
+│       └── chat.js         # Endpoint chatbot
+├── css/                    # Librerie CSS
+├── js/                     # Librerie JavaScript
+├── fonts/                  # Font Icons
+└── img/                    # Immagini
+```
 
-==> https://cloudflare-pages-template.pages.dev/ (_your link might look different_)
+## 🎨 Personalizzazione
 
-## Step 8 (Metadata)
+### Colori
+Modifica le variabili CSS in `portfolio.css`:
 
-Added `Functions/_middleware.js` from the GitHub Repo [Dynamic Social Previews Meta Tags with Cloudflare Pages](https://github.com/pew/cloudflare-pages-social-preview), in order to add Meta Tags.
+```css
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #f093fb;
+    /* ... altri colori */
+}
+```
 
-Don't forget to edit the file [_middleware.js](functions/_middleware.js) with your own title, description, and such.
+### Animazioni
+Le animazioni sono basate su:
+- CSS Animations per effetti base
+- Intersection Observer per animazioni on-scroll
+- Cubic-bezier per transizioni fluide
 
-## More (Optional) Steps
+### Contenuti
+Per aggiornare le informazioni:
+1. Modifica `index.html` per contenuti visibili
+2. Aggiorna `functions/api/chat.js` per il contesto del chatbot
 
-[Add custom headers to create Content Security Policies (CSP) and more](https://developers.cloudflare.com/pages/platform/headers/)
+## 🔧 Sviluppo Locale
 
-[Add a custom domain to a branch](https://developers.cloudflare.com/pages/how-to/custom-branch-aliases/).
+Per testare localmente:
 
-![custom-domains](/img/readme-img/custom-domains.png)
+1. Installa [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
+```bash
+npm install -g wrangler
+```
 
-[Redirecting www to domain apex](https://developers.cloudflare.com/pages/how-to/www-redirect/)
+2. Avvia il server di sviluppo:
+```bash
+wrangler pages dev .
+```
 
-[Cloudflare Pages gets even faster with Early Hints](https://blog.cloudflare.com/early-hints-on-cloudflare-pages/)
+3. Apri [http://localhost:8788](http://localhost:8788)
 
-[Build full-stack applications by executing code on the Cloudflare network with help from Cloudflare Workers](https://developers.cloudflare.com/pages/platform/functions/)
+## 📱 Responsive Design
 
-# Disclaimer
+Il sito è ottimizzato per:
+- **Desktop**: Design completo con tutte le animazioni
+- **Tablet**: Layout adattato con animazioni ridotte
+- **Mobile**: Interface compatta e touch-friendly
 
-This is a general introduction to Cloudflare Pages. 
+## 🚀 Performance
 
-Educational purposes only. This repo does not reflect the opinions of, and is not affiliated with Cloudflare. 
-Screenshots are taken from the Cloudflare dashboard.
+- **Lazy Loading**: Immagini caricate on-demand
+- **CSS Minificato**: File ottimizzati per la produzione
+- **Caching**: Headers ottimizzati per Cloudflare
+- **Preloader**: Caricamento smooth della pagina
+
+## 📞 Contatti
+
+- **Email**: andreabravaccino@gmail.com
+- **Telefono**: +39 392 625 9222
+- **LinkedIn**: [linkedin.com/in/andreabravaccino](https://linkedin.com/in/andreabravaccino)
+
+## 📄 Licenza
+
+Questo progetto è rilasciato sotto licenza MIT. Vedi il file `LICENSE` per i dettagli.
+
+---
+
+Sviluppato con ❤️ da Andrea Bravaccino • Hosted on ☁️ Cloudflare Pages

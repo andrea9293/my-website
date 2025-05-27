@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
 	<!-- Metadata -->
-    <meta charset="utf-8">
-    <meta name="keywords" content="cloudflare, pages, template, edge">
+    <meta charset="utf-8">    <meta name="keywords" content="andrea bravaccino, ai developer, salesforce architect, llm, rag, python, typescript, artificial intelligence">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="robots" content="index, follow">
-	<title>Home | Cloudflare Pages web template</title>
+	<meta name="author" content="Andrea Bravaccino">
+	<title>Andrea Bravaccino | AI Developer & Salesforce Architect</title>
     <link rel="shortcut icon" type="image/png" href="favicon.png">
 	<!-- Metadata END -->
-    
-	<!-- Stylesheets -->
+    	<!-- Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css?1563">
-	<link rel="stylesheet" type="text/css" href="style.css?2909">
+	<link rel="stylesheet" type="text/css" href="portfolio.css?2909">
 	<link rel="stylesheet" type="text/css" href="./css/animate.min.css?7190">
 	<link rel="stylesheet" type="text/css" href="./css/all.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<!-- Stylesheets END -->
 
 	<!-- Here HTMLRewriter will write the Metadata from _middleware.js -->
@@ -25,83 +27,355 @@
 <div id="page-loading-blocs-notifaction" class="page-preloader"></div>
 <!-- Preloader END -->
 
+<!-- Chatbot Button -->
+<div id="chatbot-toggle" class="chatbot-toggle">
+	<i class="fas fa-robot"></i>
+</div>
+
+<!-- Chatbot Modal -->
+<div id="chatbot-modal" class="chatbot-modal">	
+	<div class="chatbot-header">
+		<h4>🤖 Chat with SynthDrea!</h4>
+		<button id="chatbot-close" class="chatbot-close">&times;</button>
+	</div><div id="chatbot-messages" class="chatbot-messages">
+		<div class="message bot-message">
+			Hey! 👋 I'm SynthDrea, Andrea's witty AI sidekick! Want to know about his AI wizardry, Salesforce sorcery, or that time he made Outlook emails actually readable? Ask away! 🚀
+		</div>
+	</div>
+	<div class="chatbot-input">		
+		<input type="text" id="chatbot-input-field" placeholder="Ask me about Andrea's cool projects...">
+		<button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+	</div>
+</div>
 
 <!-- Main container -->
 <div class="page-container">
     
-<!-- bloc-0 -->
-<div class="bloc bloc-fill-screen l-bloc " id="bloc-0">
-	<div class="container fill-bloc-top-edge">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand" href="#home">Andrea Bravaccino</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item"><a class="nav-link" href="#home">Home 🏠</a></li>
+				<li class="nav-item"><a class="nav-link" href="#about">About Me 🤓</a></li>
+				<li class="nav-item"><a class="nav-link" href="#skills">Superpowers 💪</a></li>
+				<li class="nav-item"><a class="nav-link" href="#projects">Cool Stuff 🚀</a></li>
+				<li class="nav-item"><a class="nav-link" href="#experience">Journey 🛤️</a></li>
+				<li class="nav-item"><a class="nav-link" href="#contact">Let's Chat 💬</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-8 text-center">
+				<div class="profile-picture animate-image">
+					<img src="img/profile_pic.jpg" alt="Andrea Bravaccino" class="img-fluid">
+				</div>
+				<div class="hero-content">
+					<h1 class="display-4 fw-bold text-white mb-3 animate-title">
+						Andrea Bravaccino
+					</h1>
+					<h2 class="h3 text-white-75 mb-4 animate-subtitle">
+						AI Developer | Salesforce Architect | Chief Coffee Transmutation Officer 👨‍💻
+					</h2>
+					<p class="lead text-white-50 mb-5 animate-description">
+						Salesforce Architect and AI developer with over 6 years of experience, turning 
+						complex problems into elegant solutions, and occasionally, coffee into code. I've 
+						recently dived deep into AI, building systems with LLMs and semantic embeddings.
+						My approach is user-focused, probably thanks to my psychological counseling 
+						background - I understand users, and sometimes, even confusing project
+						requirements. Fluent in 'Problem Solver' and 'Digital Innovator'.
+					</p>
+					<div class="hero-buttons animate-buttons">
+						<a href="mailto:andreabravaccino@gmail.com" class="btn btn-primary btn-lg me-3">Email Me (if you dare!)</a>
+						<a href="https://linkedin.com/in/andreabravaccino/" target="_blank" class="btn btn-outline-light btn-lg">LinkedIn (Stalk me professionally)</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="scroll-indicator">
+		<a href="#about" class="scroll-down">
+			<i class="fas fa-chevron-down"></i>
+		</a>
+	</div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-5 bg-dark text-white">
+	<div class="container">		<div class="row">
+			<div class="col-lg-12 text-center mb-5">
+				<h2 class="section-title text-white">About This Human 🤓</h2>
+				<p class="section-subtitle text-white-75">The guy behind the AI magic</p>
+			</div>
+		</div>
+		<div class="row align-items-center">			
+			<div class="col-lg-6">
+				<div class="about-content">
+					<p class="lead">
+						I'm an <strong>AI Developer</strong> and <strong>Salesforce Architect</strong> with 6+ years of experience 
+						turning complex enterprise problems into elegant solutions. Think of me as a digital translator! 🤖→😊
+					</p>
+					<p class="lead">
+						I specialize in <strong>Large Language Models (LLM)</strong>, 
+						<strong>Retrieval Augmented Generation (RAG)</strong>, and making Salesforce do backflips. 
+						My passion? Making technology that actually makes sense to humans!
+					</p>
+					<p class="lead">
+						Fun fact: I also study psychological counseling, which means I can debug your code 
+						<em>and</em> help you work through your debugging frustrations! 🧠💡
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-6">				
+				<div class="certifications-grid">
+					<h4 class="mb-4">Salesforce Certificates 🏆</h4>
+					<p class="text-muted mb-3">I collected them all like Pokémon cards!</p>
+					<div class="cert-items">
+						<div class="cert-item">Application Architect</div>
+						<div class="cert-item">System Architect</div>
+						<div class="cert-item">Integration Architect</div>
+						<div class="cert-item">Data Architect</div>
+						<div class="cert-item">Sharing and Visibility Architect</div>
+						<div class="cert-item">Development Lifecycle and Deployment Architect</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="py-5 bg-dark-accent">
+	<div class="container">		
 		<div class="row">
-			<div class="col-12">
-				<nav class="navbar navbar-light row navbar-expand-md" role="navigation">
-					<div class="container-fluid ">
-						<a class="navbar-brand" href="index.html">Welcome.</a>
-						<button id="nav-toggle" type="button" class="ui-navbar-toggler navbar-toggler border-0 p-0 ms-auto me-md-0" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="collapse" data-bs-target=".navbar-35092">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse navbar-120 navbar-29706 navbar-45188 navbar-18426 navbar-42371 navbar-35092">
-							<ul class="site-navigation nav navbar-nav ms-auto">
-								<li class="nav-item">
-									<a href="index.html" class="nav-link a-btn">Home</a>
-								</li>
-							</ul>
+			<div class="col-lg-12 text-center mb-5">
+				<h2 class="section-title text-white">My Tech Superpowers 💪</h2>
+				<p class="section-subtitle text-white-75">The tools I use to make digital magic happen</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4 col-md-6 mb-4">				
+				<div class="skill-card">
+					<div class="skill-icon">🤖</div>
+					<h4>AI Wizardry</h4>
+					<ul>
+						<li>Large Language Models (I speak GPT fluently!)</li>
+						<li>Prompt Engineering (AI whispering 🗣️)</li>
+						<li>RAG (Making AI remember stuff)</li>
+						<li>Vector embeddings (Math that actually works!)</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 mb-4">				
+				<div class="skill-card">
+					<div class="skill-icon">🛠️</div>
+					<h4>Code Crafting</h4>
+					<ul>
+						<li>Python, TypeScript, JavaScript (trilingual!)</li>
+						<li>FastAPI, LangChain, CrewAI (my AI toolkit)</li>
+						<li>OpenAI, Claude, Gemini (on first-name basis)</li>
+						<li>Git, CI/CD, Docker (the usual suspects)</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 mb-4">				
+				<div class="skill-card">
+					<div class="skill-icon">☁️</div>
+					<h4>Salesforce Sorcery</h4>
+					<ul>
+						<li>Apex, Lightning (making components dance)</li>
+						<li>Flows, Process Builder (automation magic)</li>
+						<li>REST/SOAP APIs (teaching systems to talk)</li>
+						<li>Enterprise Architecture (big picture thinking)</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-5 bg-dark text-white">
+	<div class="container">		<div class="row">
+			<div class="col-lg-12 text-center mb-5">
+				<h2 class="section-title text-white">Cool Stuff I Built 🛠️</h2>
+				<p class="section-subtitle text-white-75">Projects that make me proud (and actually work!)</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 mb-4">
+				<div class="project-card">
+					<div class="project-header">
+						<h4>🧠 Ariel - Intelligent Personal Assistant</h4>
+						<div class="project-tech">
+							<span class="tech-tag">Python</span>
+							<span class="tech-tag">LangChain</span>
+							<span class="tech-tag">GPT-4</span>
+							<span class="tech-tag">FastAPI</span>
+						</div>
+					</div>					<p>
+						My AI butler that connects Gmail, Calendar, Alexa, and Telegram. 
+						Basically JARVIS, but for normal people who just want their life organized! 🤵‍♂️✨
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-6 mb-4">
+				<div class="project-card">
+					<div class="project-header">
+						<h4>💭 MemoGenius - AI-Powered Assistant</h4>
+						<div class="project-tech">
+							<span class="tech-tag">React</span>
+							<span class="tech-tag">TypeScript</span>
+							<span class="tech-tag">Gemini AI</span>
+							<span class="tech-tag">ChromaDB</span>
+						</div>
+					</div>					<p>
+						Multi-platform AI assistant with a better memory than mine (and I'm human!). 
+						Works on Web, Telegram, and Alexa. It remembers everything so you don't have to! 🧠💾
+					</p>
+					<a href="https://github.com/andrea9293/memogenius" target="_blank" class="project-link">
+						<i class="fab fa-github"></i> GitHub
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-6 mb-4">
+				<div class="project-card">
+					<div class="project-header">
+						<h4>📧 Outlook Email Summarizer</h4>
+						<div class="project-tech">
+							<span class="tech-tag">Chrome Extension</span>
+							<span class="tech-tag">Node.js</span>
+							<span class="tech-tag">Gemini AI</span>
+						</div>
+					</div>					<p>
+						Chrome extension that makes Outlook emails actually readable! 📧→😊 
+						AI-powered summaries and chat features. Your inbox will thank you.
+					</p>
+					<a href="https://github.com/andrea9293/outlook-email-summarizer" target="_blank" class="project-link">
+						<i class="fab fa-github"></i> GitHub
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-6 mb-4">
+				<div class="project-card">
+					<div class="project-header">
+						<h4>🚀 Salesforce Bulk API Tool</h4>
+						<div class="project-tech">
+							<span class="tech-tag">Python</span>
+							<span class="tech-tag">Salesforce API</span>
+							<span class="tech-tag">Multi-threading</span>
+						</div>
+					</div>					<p>
+						Python tool that deletes Salesforce data faster than you can say "oops". 
+						Multi-threaded for maximum efficiency (and minimum coffee breaks)! ⚡🗑️
+					</p>
+					<a href="https://github.com/andrea9293/tool-bulk-api-salesforce" target="_blank" class="project-link">
+						<i class="fab fa-github"></i> GitHub
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience" class="py-5 bg-dark-accent">
+	<div class="container">		<div class="row">
+			<div class="col-lg-12 text-center mb-5">
+				<h2 class="section-title text-white">My Professional Journey 🚀</h2>
+				<p class="section-subtitle text-white-75">How I got here (spoiler: lots of coffee was involved)</p>
+			</div>
+		</div>
+		<div class="timeline">
+			<div class="timeline-item">
+				<div class="timeline-marker"></div>				<div class="timeline-content">
+					<h4>AI Developer | Salesforce Architect 🧙‍♂️</h4>
+					<p class="company">Engineering Group</p>
+					<p class="period">April 2022 - Present (Still going strong!)</p>
+					<ul>
+						<li>Building AI agents that actually understand customer support 🤖💬</li>
+						<li>Integrating LLMs into enterprise systems (making corporate world smarter)</li>
+						<li>Architecting complex CRM solutions (Salesforce backflips included)</li>
+						<li>Mentoring junior developers (teaching the next generation of wizards)</li>
+					</ul>
+				</div>
+			</div>			<div class="timeline-item">
+				<div class="timeline-marker"></div>
+				<div class="timeline-content">
+					<h4>Software Engineer | Salesforce Developer 💻</h4>
+					<p class="company">Indra</p>
+					<p class="period">January 2020 - March 2022</p>
+					<ul>
+						<li>Built custom Salesforce solutions (public & private projects)</li>
+						<li>Made APIs talk to each other nicely via REST/SOAP</li>
+						<li>Delivered tailored solutions for complex business processes</li>
+					</ul>
+				</div>
+			</div>
+			<div class="timeline-item">
+				<div class="timeline-marker"></div>
+				<div class="timeline-content">
+					<h4>Software Engineer | Salesforce Developer 🌱</h4>
+					<p class="company">Enigen Italia (NTT Data)</p>
+					<p class="period">September 2018 - January 2020</p>
+					<ul>
+						<li>Service Cloud & Sales Cloud specialist (cloud hopping!)</li>
+						<li>Post-go-live support and evolution maintenance</li>
+						<li>Cross-team collaboration on European projects</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5 bg-dark text-white">
+	<div class="container">		<div class="row">
+			<div class="col-lg-12 text-center mb-5">
+				<h2 class="section-title text-white">Let's Connect! 🤝</h2>
+				<p class="section-subtitle text-white-75">Ready to build something awesome together?</p>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<div class="contact-info">
+					<div class="row justify-content-center">
+						<div class="col-md-6 col-lg-5 text-center mb-4">
+							<div class="contact-item">
+								<i class="fas fa-envelope"></i>
+								<h5>Email</h5>
+								<a href="mailto:andreabravaccino@gmail.com">andreabravaccino@gmail.com</a>
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-5 text-center mb-4">
+							<div class="contact-item">
+								<i class="fab fa-linkedin"></i>
+								<h5>LinkedIn</h5>
+								<a href="https://linkedin.com/in/andreabravaccino/" target="_blank">linkedin.com/in/andreabravaccino/</a>
+							</div>
 						</div>
 					</div>
-				</nav>
+				</div>
 			</div>
 		</div>
 	</div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 bg-dark text-white text-center">
 	<div class="container">
-		<div class="row">
-			<div class="col">
-				<h1 class="text-center mg-clear hero-header-text text-blue-gradient">
-					Welcome.<br>
-				</h1>
-				<h3 class="mg-md float-none text-center hero-subheader tc-black">
-					This is a template to get started with <a href="https://pages.cloudflare.com/" rel="nofollow noopener noreferrer" target="_blank">Cloudflare Pages</a>.
-				</h3>
-			</div>
-		</div>
+		<p>&copy; 2025 Andrea Bravaccino. Made with <span class="heart">❤️</span> and ☕</p>
 	</div>
-	<div class="container fill-bloc-bottom-edge">
-		<div class="row">
-			<div class="col-12">
-				<div class="text-center">
-					<a href="#" data-scroll-speed="1000" onclick="scrollToTarget('0',this)"><span class="fa fa-angle-down icon-md animated bounce animDelay08"></span></a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- bloc-0 END -->
-
-<!-- bloc-1 -->
-<div class="bloc l-bloc" id="bloc-1">
-	<div class="container bloc-lg">
-		<div class="row">
-			<div class="col-lg-12 hero-first-col-mb">
-				<h1 class="mg-md text-center">
-					The Cloudflare Network
-				</h1>
-				<div class="text-center">
-					<a href="https://www.cloudflare.com/network/" class="btn btn-lg btn-rd btn-portland-orange" rel="nofollow noopener noreferrer" target="_blank">Explore</a>
-				</div>
-			</div>
-			<div class="offset-md-2 col-md-8 col-lg-8 offset-lg-2">
-				<div class="mx-auto d-block blocsapp-device blocsapp-device-mb mb-space-grey">
-					<img src="img/lazyload-ph.png" data-src="img/cloudflare-network.png" class="img-fluid lazyload" alt="cloudflare network" />
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- bloc-1 END -->
-
-<!-- ScrollToTop Button -->
-<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1',this)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32"><path class="scroll-to-top-btn-icon" d="M30,22.656l-14-13-14,13"/></svg></a>
-<!-- ScrollToTop Button END-->
-
+</footer>
 
 </div>
 <!-- Main container END -->
@@ -111,7 +385,9 @@
 <!-- Additional JS -->
 <script src="./js/bootstrap.bundle.min.js?8537"></script>
 <script src="./js/blocs.min.js?4639"></script>
-<script src="./js/lazysizes.min.js" defer></script><!-- Additional JS END -->
+<script src="./js/lazysizes.min.js" defer></script>
+<script src="portfolio.js"></script>
+<!-- Additional JS END -->
 
 </body>
 </html>

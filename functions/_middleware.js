@@ -16,10 +16,9 @@ export async function onRequest(context) {
   if (!(pathname === '/index.html' || pathname === '/')) {
     return res
   }
-
   // Metatags Variables (edit these!)
-  const metatitle = "Cloudflare Pages Template"
-  const metadescription = "Get started with Cloudflare Pages by deploying this pretty simple template on your own account, and start playing around."
+  const metatitle = "Andrea Bravaccino - AI Developer & Salesforce Architect"
+  const metadescription = "Portfolio di Andrea Bravaccino, AI Developer e Salesforce Architect specializzato in LLM, RAG, e soluzioni enterprise scalabili. Scopri i miei progetti e la mia esperienza."
 
   let name = searchParams.get('myQuery')
   let ogtag
@@ -40,7 +39,7 @@ export async function onRequest(context) {
     <meta name="twitter:title" content="${metatitle}" />
     <meta name="twitter:description" content="${metadescription}" />
 
-    <meta name="description" content="and even more stuff about my page" />
+    <meta name="description" content="Portfolio professionale di Andrea Bravaccino, AI Developer e Salesforce Architect con oltre 6 anni di esperienza nello sviluppo di soluzioni enterprise e sistemi AI avanzati." />
   `
 
   return new HTMLRewriter().on('head', new ElementHandler(ogtag)).transform(res)

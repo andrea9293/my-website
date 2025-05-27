@@ -1,0 +1,6 @@
+name = "my-website"
+compatibility_date = "2023-12-01"
+
+# Variabili per sviluppo locale - Pages Functions
+[vars]
+GEMINI_API_KEY = "AIzaSyAyb36chr8WA-9ShumvcoDFEVtloNVKbow"
