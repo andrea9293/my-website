@@ -336,7 +336,7 @@ html {
     z-index: 2;
 }
 
-.container {
+.main-section {
     padding-top: 14vh;
 }
 
@@ -949,7 +949,7 @@ section {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
-    z-index: 1000;
+    z-index: 1050;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     animation: pulse 2s infinite;
 }
@@ -972,14 +972,14 @@ section {
 
 .chatbot-modal {
     position: fixed;
-    bottom: 100px;
+    bottom: 110px;
     right: 30px;
-    width: 380px;
-    height: 520px;
+    width: 450px;
+    height: 650px;
     background: #1a2133;
     border-radius: 20px;
     box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
-    z-index: 1001;
+    z-index: 1055;
     display: none;
     flex-direction: column;
     overflow: hidden;
@@ -1417,6 +1417,24 @@ footer .heart {
 }
 
 /* Responsive Design */
+@media (min-width: 1400px) {
+    .chatbot-modal {
+        width: 500px;
+        height: 700px;
+        right: 40px;
+        bottom: 120px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .chatbot-modal {
+        width: 420px;
+        height: 600px;
+        right: 25px;
+        bottom: 110px;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-section {
         text-align: center;
@@ -1431,12 +1449,11 @@ footer .heart {
         width: 200px;
         height: 200px;
     }
-    
-    .chatbot-modal {
-        width: 300px;
-        height: 590px;
+      .chatbot-modal {
+        width: 380px;
+        height: 550px;
         right: 20px;
-        bottom: 90px;
+        bottom: 100px;
     }
     
     .timeline {
@@ -1463,12 +1480,12 @@ footer .heart {
         bottom: 20px;
         right: 20px;
     }
-    
-    .chatbot-modal {
+      .chatbot-modal {
         width: calc(100vw - 40px);
-        height: 590px;
+        height: calc(100vh - 140px);
         right: 20px;
-        bottom: 80px;
+        bottom: 90px;
+        max-height: 600px;
     }
 
     .hero-buttons {
@@ -1477,6 +1494,17 @@ footer .heart {
 
     .btn-primary {
         margin-bottom: 1rem;
+    }
+}
+
+/* Mobile landscape orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+    .chatbot-modal {
+        width: 400px;
+        height: calc(100vh - 120px);
+        max-height: 500px;
+        right: 20px;
+        bottom: 80px;
     }
 }
 
