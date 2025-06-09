@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌈 Sequenza di Colori 🌈</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #a8edea, #fed6e3, #ffeaa7, #fab1a0);
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #e84393;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #00b894;
+            margin-bottom: 20px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .score-item {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .colors-container {
+            display: grid;
+            grid-template-columns: repeat(2, 120px);
+            grid-template-rows: repeat(2, 120px);
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .color-button {
+            width: 120px;
+            height: 120px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-button:active {
+            transform: scale(0.95);
+        }
+
+        .color-button.red {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+        }
+
+        .color-button.blue {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+        }
+
+        .color-button.green {
+            background: linear-gradient(45deg, #00b894, #00a085);
+        }
+
+        .color-button.yellow {
+            background: linear-gradient(45deg, #fdcb6e, #f39c12);
+        }
+
+        .color-button.flash {
+            animation: flashColor 0.5s ease;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes flashColor {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.15); filter: brightness(1.5); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+
+        .color-button.correct {
+            animation: correctPulse 0.4s ease;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .color-button.wrong {
+            animation: wrongShake 0.5s ease;
+            filter: brightness(0.5);
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .color-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .sequence-display {
+            background: linear-gradient(45deg, #2d3436, #636e72);
+            color: white;
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-weight: bold;
+            color: white;
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #00b894, #00a085);
+        }
+
+        .reset-btn {
+            background: linear-gradient(45deg, #ff7675, #d63031);
+        }
+
+        .home-btn {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            font-size: 1.4rem;
+            color: #e84393;
+            margin: 20px 0;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: messageGlow 2s infinite;
+        }
+
+        @keyframes messageGlow {
+            0% { text-shadow: 0 0 5px rgba(232, 67, 147, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(232, 67, 147, 0.8); }
+            100% { text-shadow: 0 0 5px rgba(232, 67, 147, 0.5); }
+        }
+
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .colors-container {
+                grid-template-columns: repeat(2, 100px);
+                grid-template-rows: repeat(2, 100px);
+                gap: 15px;
+            }
+            
+            .color-button {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .score-board {
+                gap: 10px;
+            }
+            
+            .score-item {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="title">🌈 Sequenza di Colori 🌈</h1>
+        <p class="subtitle">Guarda e ripeti la sequenza!</p>
+        
+        <div class="score-board">
+            <div class="score-item">
+                🔥 Livello: <span id="level">1</span>
+            </div>
+            <div class="score-item">
+                ⭐ Punteggio: <span id="score">0</span>
+            </div>
+            <div class="score-item">
+                🎯 Record: <span id="record">0</span>
+            </div>
+        </div>
+        
+        <div class="sequence-display" id="sequenceDisplay">
+            Premi "Inizia" per vedere la sequenza! 🎮
+        </div>
+        
+        <div class="colors-container">
+            <button class="color-button red" data-color="red" onclick="playerChoice('red')"></button>
+            <button class="color-button blue" data-color="blue" onclick="playerChoice('blue')"></button>
+            <button class="color-button green" data-color="green" onclick="playerChoice('green')"></button>
+            <button class="color-button yellow" data-color="yellow" onclick="playerChoice('yellow')"></button>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn start-btn" id="startBtn" onclick="startGame()">🚀 Inizia</button>
+            <button class="control-btn reset-btn" onclick="resetGame()">🔄 Reset</button>
+            <button class="control-btn home-btn" onclick="goHome()">🏠 Menu Giochi</button>
+        </div>
+        
+        <div class="message" id="message">Premi "Inizia" per cominciare a giocare! 🎯</div>
+    </div>
+    
+    <div class="celebration" id="celebration"></div>
+
+    <script>
+        class ColorSequenceGame {
+            constructor() {
+                this.colors = ['red', 'blue', 'green', 'yellow'];
+                this.colorNames = {
+                    red: 'Rosso 🔴',
+                    blue: 'Blu 🔵',
+                    green: 'Verde 🟢',
+                    yellow: 'Giallo 🟡'
+                };
+                this.sequence = [];
+                this.playerSequence = [];
+                this.level = 1;
+                this.score = 0;
+                this.record = localStorage.getItem('colorGameRecord') || 0;
+                this.isShowingSequence = false;
+                this.isPlayerTurn = false;
+                this.currentStep = 0;
+                this.init();
+            }
+
+            init() {
+                this.updateDisplay();
+                this.updateMessage("Premi 'Inizia' per cominciare a giocare! 🎯");
+                document.getElementById('record').textContent = this.record;
+            }
+
+            startGame() {
+                this.sequence = [];
+                this.level = 1;
+                this.score = 0;
+                this.addToSequence();
+                this.showSequence();
+                
+                document.getElementById('startBtn').disabled = true;
+                this.updateMessage("Guarda attentamente la sequenza! 👀");
+            }
+
+            addToSequence() {
+                const randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
+                this.sequence.push(randomColor);
+            }
+
+            async showSequence() {
+                this.isShowingSequence = true;
+                this.isPlayerTurn = false;
+                this.disableButtons();
+                
+                // Mostra la sequenza nel display
+                const sequenceText = this.sequence.map(color => this.colorNames[color]).join(' → ');
+                document.getElementById('sequenceDisplay').textContent = `Sequenza: ${sequenceText}`;
+                
+                await this.sleep(1000);
+                
+                // Mostra ogni colore della sequenza
+                for (let i = 0; i < this.sequence.length; i++) {
+                    await this.sleep(500);
+                    this.flashColor(this.sequence[i]);
+                    await this.sleep(600);
+                }
+                
+                await this.sleep(500);
+                
+                // Ora tocca al giocatore
+                this.isShowingSequence = false;
+                this.isPlayerTurn = true;
+                this.playerSequence = [];
+                this.currentStep = 0;
+                this.enableButtons();
+                
+                document.getElementById('sequenceDisplay').textContent = "Il tuo turno! Ripeti la sequenza! 🎯";
+                this.updateMessage("Ora tocca a te! Clicca i colori nello stesso ordine! 🎮");
+            }
+
+            flashColor(color) {
+                const button = document.querySelector(`.color-button.${color}`);
+                button.classList.add('flash');
+                this.playFlashSound();
+                
+                setTimeout(() => {
+                    button.classList.remove('flash');
+                }, 500);
+            }
+
+            playerChoice(color) {
+                if (!this.isPlayerTurn || this.isShowingSequence) return;
+                
+                this.playerSequence.push(color);
+                
+                // Controllo se la scelta è corretta
+                if (this.playerSequence[this.currentStep] === this.sequence[this.currentStep]) {
+                    // Scelta corretta
+                    this.flashColor(color);
+                    this.playCorrectSound();
+                    this.currentStep++;
+                    
+                    if (this.currentStep === this.sequence.length) {
+                        // Sequenza completata correttamente!
+                        this.levelCompleted();
+                    } else {
+                        this.updateMessage(`Bene! Continua... (${this.currentStep}/${this.sequence.length}) 🌟`);
+                    }
+                } else {
+                    // Scelta sbagliata
+                    this.wrongChoice(color);
+                }
+            }
+
+            levelCompleted() {
+                this.score += this.level * 10;
+                this.level++;
+                
+                this.celebrate();
+                this.playLevelUpSound();
+                this.updateMessage(`🎉 Livello completato! Livello ${this.level} 🎉`);
+                
+                setTimeout(() => {
+                    this.addToSequence();
+                    this.showSequence();
+                }, 2000);
+            }
+
+            wrongChoice(color) {
+                const button = document.querySelector(`.color-button.${color}`);
+                button.classList.add('wrong');
+                
+                this.playWrongSound();
+                this.isPlayerTurn = false;
+                this.disableButtons();
+                
+                // Aggiorna record se necessario
+                if (this.score > this.record) {
+                    this.record = this.score;
+                    localStorage.setItem('colorGameRecord', this.record);
+                    this.updateMessage(`🏆 Nuovo record! Punteggio: ${this.score} 🏆`);
+                } else {
+                    this.updateMessage(`💫 Ops! La sequenza era diversa. Punteggio finale: ${this.score} 💫`);
+                }
+                
+                setTimeout(() => {
+                    button.classList.remove('wrong');
+                    this.gameOver();
+                }, 1500);
+            }
+
+            gameOver() {
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('sequenceDisplay').textContent = "Game Over! Premi 'Inizia' per ricominciare!";
+                this.updateMessage("Premi 'Inizia' per una nuova partita! 🔄");
+            }
+
+            celebrate() {
+                const celebration = document.getElementById('celebration');
+                celebration.style.display = 'block';
+                
+                // Crea coriandoli
+                for (let i = 0; i < 30; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = ['#ff6b6b', '#74b9ff', '#00b894', '#fdcb6e'][Math.floor(Math.random() * 4)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    celebration.appendChild(confetti);
+                }
+                
+                setTimeout(() => {
+                    celebration.style.display = 'none';
+                    celebration.innerHTML = '';
+                }, 2000);
+            }
+
+            disableButtons() {
+                document.querySelectorAll('.color-button').forEach(btn => {
+                    btn.disabled = true;
+                });
+            }
+
+            enableButtons() {
+                document.querySelectorAll('.color-button').forEach(btn => {
+                    btn.disabled = false;
+                });
+            }
+
+            updateDisplay() {
+                document.getElementById('level').textContent = this.level;
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('record').textContent = this.record;
+            }
+
+            updateMessage(text) {
+                document.getElementById('message').textContent = text;
+            }
+
+            playFlashSound() {
+                if (navigator.vibrate) {
+                    navigator.vibrate(100);
+                }
+            }
+
+            playCorrectSound() {
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+            }
+
+            playWrongSound() {
+                if (navigator.vibrate) {
+                    navigator.vibrate([200, 100, 200]);
+                }
+            }
+
+            playLevelUpSound() {
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100, 50, 200]);
+                }
+            }
+
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            resetGame() {
+                this.sequence = [];
+                this.playerSequence = [];
+                this.level = 1;
+                this.score = 0;
+                this.isShowingSequence = false;
+                this.isPlayerTurn = false;
+                this.currentStep = 0;
+                
+                this.enableButtons();
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('sequenceDisplay').textContent = "Premi 'Inizia' per vedere la sequenza! 🎮";
+                
+                this.updateDisplay();
+                this.updateMessage("Premi 'Inizia' per cominciare a giocare! 🎯");
+            }
+        }
+
+        // Inizializza il gioco
+        let game;
+        
+        window.onload = () => {
+            game = new ColorSequenceGame();
+        };
+
+        // Funzioni globali per i pulsanti
+        function startGame() {
+            game.startGame();
+        }
+
+        function playerChoice(color) {
+            game.playerChoice(color);
+        }
+
+        function resetGame() {
+            game.resetGame();
+        }
+
+        function goHome() {
+            window.location.href = 'games.html';
+        }
+    </script>
+</body>
+</html>

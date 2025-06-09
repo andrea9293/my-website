@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐱 Memory degli Animali 🐱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #74b9ff, #0984e3, #6c5ce7, #a29bfe);
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 700px;
+            width: 90%;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #e17055;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #6c5ce7;
+            margin-bottom: 20px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .score-item {
+            background: linear-gradient(45deg, #00b894, #00a085);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .memory-card {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #fd79a8, #e84393);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 0 5px 15px rgba(232, 67, 147, 0.3);
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(232, 67, 147, 0.4);
+        }
+
+        .memory-card.flipped {
+            background: linear-gradient(45deg, #00b894, #00a085);
+            transform: rotateY(180deg);
+            animation: flipCard 0.6s ease;
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(45deg, #fdcb6e, #e17055);
+            animation: matchedPulse 0.6s ease;
+            pointer-events: none;
+        }
+
+        .memory-card.wrong {
+            animation: wrongShake 0.5s ease;
+        }
+
+        @keyframes flipCard {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(90deg) scale(1.1); }
+            100% { transform: rotateY(180deg); }
+        }
+
+        @keyframes matchedPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            backface-visibility: hidden;
+        }
+
+        .card-front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-weight: bold;
+        }
+
+        .reset-btn {
+            background: linear-gradient(45deg, #ff7675, #d63031);
+            color: white;
+        }
+
+        .new-game-btn {
+            background: linear-gradient(45deg, #00b894, #00a085);
+            color: white;
+        }
+
+        .home-btn {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .message {
+            font-size: 1.4rem;
+            color: #e17055;
+            margin: 20px 0;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: messageGlow 2s infinite;
+        }
+
+        @keyframes messageGlow {
+            0% { text-shadow: 0 0 5px rgba(225, 112, 85, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(225, 112, 85, 0.8); }
+            100% { text-shadow: 0 0 5px rgba(225, 112, 85, 0.5); }
+        }
+
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .memory-grid {
+                grid-template-columns: repeat(4, 80px);
+                grid-template-rows: repeat(3, 80px);
+                gap: 10px;
+            }
+            
+            .memory-card {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .score-board {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="title">🐱 Memory degli Animali 🐱</h1>
+        <p class="subtitle">Trova le coppie di animali uguali!</p>
+        
+        <div class="score-board">
+            <div class="score-item">
+                🏆 Coppie: <span id="matches">0</span>/6
+            </div>
+            <div class="score-item">
+                👀 Tentativi: <span id="attempts">0</span>
+            </div>
+            <div class="score-item">
+                ⭐ Stelle: <span id="stars">3</span>
+            </div>
+        </div>
+        
+        <div class="memory-grid" id="memoryGrid"></div>
+        
+        <div class="message" id="message">Clicca su due carte per trovare le coppie! 🎮</div>
+        
+        <div class="controls">
+            <button class="control-btn reset-btn" onclick="resetGame()">🔄 Ricomincia</button>
+            <button class="control-btn new-game-btn" onclick="newGame()">🎲 Nuovo Gioco</button>
+            <button class="control-btn home-btn" onclick="goHome()">🏠 Menu Giochi</button>
+        </div>
+    </div>
+    
+    <div class="celebration" id="celebration"></div>
+
+    <script>
+        class MemoryGame {
+            constructor() {
+                this.animals = ['🐱', '🐶', '🐰', '🐸', '🐷', '🐵'];
+                this.cards = [];
+                this.flippedCards = [];
+                this.matches = 0;
+                this.attempts = 0;
+                this.stars = 3;
+                this.isProcessing = false;
+                this.init();
+            }
+
+            init() {
+                this.createCards();
+                this.renderCards();
+                this.updateScore();
+                this.updateMessage("Clicca su due carte per trovare le coppie! 🎮");
+            }
+
+            createCards() {
+                // Crea coppie di animali
+                this.cards = [];
+                this.animals.forEach(animal => {
+                    this.cards.push({ id: Math.random(), animal, isFlipped: false, isMatched: false });
+                    this.cards.push({ id: Math.random(), animal, isFlipped: false, isMatched: false });
+                });
+                
+                // Mescola le carte
+                this.shuffleCards();
+            }
+
+            shuffleCards() {
+                for (let i = this.cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+                }
+            }
+
+            renderCards() {
+                const grid = document.getElementById('memoryGrid');
+                grid.innerHTML = '';
+                
+                this.cards.forEach((card, index) => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'memory-card';
+                    cardElement.dataset.index = index;
+                    
+                    const cardBack = document.createElement('div');
+                    cardBack.className = 'card-back';
+                    cardBack.textContent = '❓';
+                    
+                    const cardFront = document.createElement('div');
+                    cardFront.className = 'card-front';
+                    cardFront.textContent = card.animal;
+                    
+                    cardElement.appendChild(cardBack);
+                    cardElement.appendChild(cardFront);
+                    
+                    if (card.isFlipped || card.isMatched) {
+                        cardElement.classList.add('flipped');
+                    }
+                    
+                    if (card.isMatched) {
+                        cardElement.classList.add('matched');
+                    }
+                    
+                    cardElement.addEventListener('click', () => this.flipCard(index));
+                    grid.appendChild(cardElement);
+                });
+            }
+
+            flipCard(index) {
+                if (this.isProcessing) return;
+                
+                const card = this.cards[index];
+                
+                // Non può girare carte già girate o accoppiate
+                if (card.isFlipped || card.isMatched) return;
+                
+                // Non può girare più di 2 carte
+                if (this.flippedCards.length >= 2) return;
+                
+                // Gira la carta
+                card.isFlipped = true;
+                this.flippedCards.push(index);
+                this.renderCards();
+                this.playFlipSound();
+                
+                // Se ha girato 2 carte, controlla se sono uguali
+                if (this.flippedCards.length === 2) {
+                    this.attempts++;
+                    this.updateScore();
+                    this.checkMatch();
+                }
+            }
+
+            checkMatch() {
+                this.isProcessing = true;
+                const [index1, index2] = this.flippedCards;
+                const card1 = this.cards[index1];
+                const card2 = this.cards[index2];
+                
+                setTimeout(() => {
+                    if (card1.animal === card2.animal) {
+                        // Coppia trovata!
+                        card1.isMatched = true;
+                        card2.isMatched = true;
+                        this.matches++;
+                        this.updateMessage("🎉 Bravissima! Hai trovato una coppia! 🎉");
+                        this.playMatchSound();
+                        
+                        // Animazione di successo
+                        const cardElements = document.querySelectorAll(`[data-index="${index1}"], [data-index="${index2}"]`);
+                        cardElements.forEach(el => el.classList.add('matched'));
+                        
+                        // Controlla se ha vinto
+                        if (this.matches === this.animals.length) {
+                            this.winGame();
+                        }
+                    } else {
+                        // Coppia sbagliata
+                        card1.isFlipped = false;
+                        card2.isFlipped = false;
+                        this.updateMessage("💫 Riprova! Non era la coppia giusta! 💫");
+                        this.playWrongSound();
+                        
+                        // Animazione di errore
+                        const cardElements = document.querySelectorAll(`[data-index="${index1}"], [data-index="${index2}"]`);
+                        cardElements.forEach(el => el.classList.add('wrong'));
+                        
+                        setTimeout(() => {
+                            cardElements.forEach(el => el.classList.remove('wrong'));
+                        }, 500);
+                        
+                        // Riduci stelle se troppi tentativi
+                        if (this.attempts > 8 && this.stars > 1) {
+                            this.stars--;
+                        }
+                    }
+                    
+                    this.flippedCards = [];
+                    this.isProcessing = false;
+                    this.renderCards();
+                    this.updateScore();
+                }, 1000);
+            }
+
+            winGame() {
+                let message = "🏆 BRAVISSIMA! Hai trovato tutte le coppie! 🏆";
+                if (this.stars === 3) {
+                    message += "\n⭐⭐⭐ Perfetto! Tre stelle!";
+                } else if (this.stars === 2) {
+                    message += "\n⭐⭐ Molto bene! Due stelle!";
+                } else {
+                    message += "\n⭐ Bene! Una stella!";
+                }
+                
+                this.updateMessage(message);
+                this.celebrate();
+            }
+
+            celebrate() {
+                const celebration = document.getElementById('celebration');
+                celebration.style.display = 'block';
+                
+                // Crea coriandoli
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    celebration.appendChild(confetti);
+                }
+                
+                setTimeout(() => {
+                    celebration.style.display = 'none';
+                    celebration.innerHTML = '';
+                }, 3000);
+            }
+
+            updateScore() {
+                document.getElementById('matches').textContent = this.matches;
+                document.getElementById('attempts').textContent = this.attempts;
+                document.getElementById('stars').textContent = this.stars;
+            }
+
+            updateMessage(text) {
+                document.getElementById('message').textContent = text;
+            }
+
+            playFlipSound() {
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+            }
+
+            playMatchSound() {
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100, 50, 100]);
+                }
+            }
+
+            playWrongSound() {
+                if (navigator.vibrate) {
+                    navigator.vibrate([200, 100, 200]);
+                }
+            }
+
+            resetGame() {
+                this.flippedCards = [];
+                this.matches = 0;
+                this.attempts = 0;
+                this.stars = 3;
+                this.isProcessing = false;
+                
+                // Reset tutte le carte
+                this.cards.forEach(card => {
+                    card.isFlipped = false;
+                    card.isMatched = false;
+                });
+                
+                this.renderCards();
+                this.updateScore();
+                this.updateMessage("Ricomminciamo! Trova le coppie! 🎯");
+            }
+
+            newGame() {
+                this.flippedCards = [];
+                this.matches = 0;
+                this.attempts = 0;
+                this.stars = 3;
+                this.isProcessing = false;
+                
+                this.createCards();
+                this.renderCards();
+                this.updateScore();
+                this.updateMessage("Nuovo gioco! Trova le coppie! 🆕");
+            }
+        }
+
+        // Inizializza il gioco
+        let game;
+        
+        window.onload = () => {
+            game = new MemoryGame();
+        };
+
+        // Funzioni globali per i pulsanti
+        function resetGame() {
+            game.resetGame();
+        }
+
+        function newGame() {
+            game.newGame();
+        }
+
+        function goHome() {
+            window.location.href = 'games.html';
+        }
+    </script>
+</body>
+</html>

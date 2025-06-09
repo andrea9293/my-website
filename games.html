@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Giochi Magici per Sofia 🎮</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 3rem;
+            color: #e91e63;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #8e24aa;
+            margin-bottom: 40px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .game-description {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .easy { background: linear-gradient(45deg, #2ecc71, #27ae60); }
+        .medium { background: linear-gradient(45deg, #f39c12, #e67e22); }
+
+        .play-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .home-btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .game-card {
+                padding: 25px;
+            }
+            
+            .game-icon {
+                font-size: 3rem;
+            }
+            
+            .game-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="main-container">
+        <h1 class="title">🎮 Giochi Magici 🎮</h1>
+        <p class="subtitle">Scegli il tuo gioco preferito e divertiti!</p>
+        
+        <div class="games-grid">
+            <a href="labirinto.html" class="game-card">
+                <div class="game-icon">🏰</div>
+                <h3 class="game-title">Labirinto Magico</h3>
+                <p class="game-description">Aiuta la principessa a trovare il suo castello attraverso il labirinto!</p>
+                <div class="difficulty easy">Facile</div>
+                <button class="play-btn">Gioca Ora! 🎯</button>
+            </a>
+            
+            <a href="memory.html" class="game-card">
+                <div class="game-icon">🐱</div>
+                <h3 class="game-title">Memory degli Animali</h3>
+                <p class="game-description">Trova le coppie di animali uguali! Allena la tua memoria.</p>
+                <div class="difficulty easy">Facile</div>
+                <button class="play-btn">Gioca Ora! 🧠</button>
+            </a>
+            
+            <!-- <a href="abbinamenti.html" class="game-card">
+                <div class="game-icon">🎵</div>
+                <h3 class="game-title">Animali e Suoni</h3>
+                <p class="game-description">Abbina ogni animale al suo verso! Chi fa "Miao"?</p>
+                <div class="difficulty easy">Facile</div>
+                <button class="play-btn">Gioca Ora! 🔊</button>
+            </a> -->
+            
+            <a href="colori.html" class="game-card">
+                <div class="game-icon">🌈</div>
+                <h3 class="game-title">Sequenza di Colori</h3>
+                <p class="game-description">Ricorda e ripeti la sequenza di colori che ti mostro!</p>
+                <div class="difficulty medium">Medio</div>
+                <button class="play-btn">Gioca Ora! 🎨</button>
+            </a>
+        </div>
+        
+        <a href="/" class="home-btn">🏠 Torna al Sito</a>
+    </div>
+
+    <script>
+        // Crea le stelline animate
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 4 + 2 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Animazione aggiuntiva per le carte
+        function addCardAnimations() {
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.2) + 's';
+                card.style.animation = 'slideInUp 0.6s ease-out forwards';
+            });
+        }
+
+        // CSS per l'animazione slideInUp
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .game-card {
+                opacity: 0;
+            }
+        `;
+        document.head.appendChild(style);
+
+        window.onload = () => {
+            createStars();
+            addCardAnimations();
+        };
+    </script>
+</body>
+</html>
