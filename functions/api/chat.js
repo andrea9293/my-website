@@ -3,10 +3,10 @@
 
 // Helper: map project keywords to GitHub repo names
 const projectRepoMap = {
-//   'ariel': 'ariel',
-  'memogenius': 'memogenius',
   'outlook email summarizer': 'outlook-email-summarizer',
   'salesforce bulk api tool': 'tool-bulk-api-salesforce',
+  'mcp gemini prompt enhancer': 'mcp-gemini-prompt-enhancer',
+  'mcp documentation server': 'mcp-documentation-server'
   // Add more mappings as needed
 };
 
@@ -35,9 +35,11 @@ async function fetchMappedReadmes() {
   // Limit total length for Gemini context (e.g., 10,000 chars)
   let total = '';
   for (const chunk of results) {
+    console.log("chunk", chunk);
     if (total.length + chunk.length > 10000) break;
     total += `\n\n${chunk}`;
   }
+  console.log("Total README content:", total);
   return total;
 }
 
@@ -91,7 +93,7 @@ ANDREA'S PROFESSIONAL PROFILE:
 👤 PERSONAL INFO:
 - Name: Andrea Bravaccino (but you can call him the AI Whisperer 😉)
 - Role: AI Developer & Salesforce Architect (basically, he speaks fluent robot AND enterprise)
-- Experience: 6+ years of making computers do his bidding
+- Experience: since 2018 years of making computers do his bidding
 - Current Company: Engineering Group (April 2022 - Present)
 - Email: andreabravaccino@gmail.com
 - LinkedIn: linkedin.com/in/andreabravaccino
@@ -113,11 +115,6 @@ ANDREA'S PROFESSIONAL PROFILE:
 ✅ Development Lifecycle and Deployment Architect
 
 🚀 COOLEST PROJECTS:
-
-1. 🧠 Ariel - Intelligent Personal Assistant (not public yet)
-   - An AI that manages Gmail, Calendar, Alexa, and Telegram
-   - Basically JARVIS, but for normal people
-   - Tech stack: Python, LangChain, GPT-4/Gemini, FastAPI
 
 ${readmeSection}
 

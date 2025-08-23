@@ -52,7 +52,7 @@ GEMINI_API_KEY=your_google_gemini_api_key_here
 Il chatbot utilizza Google Gemini AI ed è configurato con informazioni dettagliate su:
 
 - **Competenze tecniche**: AI, LLM, Salesforce, Python, TypeScript
-- **Progetti personali**: Ariel, MemoGenius, Outlook Summarizer, Bulk API Tool
+- **Progetti personali**: I repository più importanti su github
 - **Esperienza lavorativa**: Engineering Group, Indra, Enigen Italia
 - **Certificazioni**: Tutte le certificazioni Salesforce Architect
 - **Contatti**: Email, telefono, LinkedIn
