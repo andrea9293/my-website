@@ -6,30 +6,41 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-
 <url>
   <loc>https://andreabravaccino.com/</loc>
-  <lastmod>2025-05-27T11:24:51+00:00</lastmod>
+  <lastmod>2025-08-23T12:00:00+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.0</priority>
 </url>
 <url>
   <loc>https://andreabravaccino.com/#about</loc>
-  <lastmod>2025-05-27T11:24:51+00:00</lastmod>
+  <lastmod>2025-08-23T12:00:00+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
 </url>
 <url>
   <loc>https://andreabravaccino.com/#skills</loc>
-  <lastmod>2025-05-27T11:24:51+00:00</lastmod>
+  <lastmod>2025-08-23T12:00:00+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
 </url>
 <url>
   <loc>https://andreabravaccino.com/#projects</loc>
-  <lastmod>2025-05-27T11:24:51+00:00</lastmod>
+  <lastmod>2025-08-23T12:00:00+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
 </url>
 <url>
   <loc>https://andreabravaccino.com/#experience</loc>
-  <lastmod>2025-05-27T11:24:51+00:00</lastmod>
+  <lastmod>2025-08-23T12:00:00+00:00</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://andreabravaccino.com/#contact</loc>
-  <lastmod>2025-05-27T11:24:51+00:00</lastmod>
+  <lastmod>2025-08-23T12:00:00+00:00</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
 </url>
 
 </urlset>

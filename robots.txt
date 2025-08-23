@@ -1,5 +1,12 @@
 # Reference: https://developers.cloudflare.com/fundamentals/get-started/reference/cdn-cgi-endpoint/#disallow-using-robotstxt
 User-agent: *
+Allow: /
 Disallow: /cdn-cgi/
+Disallow: /functions/
+Disallow: /.github/
 
+# Sitemap location
 Sitemap: https://andreabravaccino.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

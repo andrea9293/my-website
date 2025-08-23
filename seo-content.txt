@@ -1,0 +1,30 @@
+Andrea Bravaccino - AI Developer & Salesforce Architect
+
+This website showcases the professional portfolio of Andrea Bravaccino, an experienced AI Developer and Salesforce Architect specializing in:
+
+- Artificial Intelligence and Large Language Models (LLM)
+- Model Context Protocol (MCP) development
+- Retrieval Augmented Generation (RAG) systems
+- Salesforce enterprise solutions and architecture
+- Prompt engineering and semantic search
+
+Key Projects:
+- MCP Gemini Prompt Enhancer: AI prompt optimization using Google Gemini
+- MCP Documentation Server: Document management with semantic search
+- MemoGenius: Multi-platform AI assistant with advanced memory
+- Outlook Email Summarizer: Chrome extension for email intelligence
+- Salesforce Bulk API Tool: Enterprise data management solution
+
+Certifications:
+- Salesforce Application Architect
+- Salesforce System Architect  
+- Salesforce Integration Architect
+- Salesforce Data Architect
+- Salesforce Sharing and Visibility Architect
+- Salesforce Development Lifecycle and Deployment Architect
+
+Contact: andreabravaccino@gmail.com
+LinkedIn: https://linkedin.com/in/andreabravaccino
+GitHub: https://github.com/andrea9293
+
+Keywords: andrea bravaccino, ai developer, salesforce architect, mcp gemini prompt enhancer, mcp documentation server, memogenius, outlook email summarizer, model context protocol, prompt engineering, semantic search, enterprise ai, llm, rag, artificial intelligence, salesforce apex, lightning web components
