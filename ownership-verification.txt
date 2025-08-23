@@ -1,0 +1,20 @@
+This website (andreabravaccino.com) is the official portfolio of Andrea Bravaccino.
+
+Owner verification:
+- Email: andreabravaccino@gmail.com
+- LinkedIn: https://linkedin.com/in/andreabravaccino
+- GitHub: https://github.com/andrea9293
+
+This site is hosted on Cloudflare Pages and is used exclusively for:
+- Professional portfolio presentation
+- Showcasing software development projects
+- Contact information for business purposes
+- AI-powered chatbot for visitor assistance
+
+Security measures implemented:
+- Content Security Policy
+- External link security attributes
+- Regular security updates
+- Cloudflare protection
+
+Last updated: August 23, 2025
