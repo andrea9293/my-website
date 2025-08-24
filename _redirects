@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects
+# See: https://developers.cloudflare.com/pages/platform/redirects/
+
+# Redirect index.htm to root (for legacy URLs)
+/index.htm / 301
+
+# Redirect any .htm extensions to .html (general rule for legacy URLs)
+/*.htm /:splat.html 301
