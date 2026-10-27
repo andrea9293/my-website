@@ -8,30 +8,41 @@ class ElementHandler {
   }
 }
 
+function escapeAttr(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 export async function onRequest(context) {
   const { request, next } = context
   const res = await next()
-  const { searchParams, pathname } = new URL(request.url)
+  const url = new URL(request.url)
 
-  if (!(pathname === '/index.html' || pathname === '/')) {
+  if (!(url.pathname === '/index.html' || url.pathname === '/')) {
     return res
   }
+
   // Metatags Variables (edit these!)
   const metatitle = "Andrea Bravaccino - AI Developer & Salesforce Architect | MCP Expert"
   const metadescription = "Andrea Bravaccino: AI Developer e Salesforce Architect con 6+ anni esperienza. Specializzato in LLM, RAG, Model Context Protocol. Creatore di MCP Gemini Prompt Enhancer, MCP Documentation Server, MemoGenius."
   const keywords = "andrea bravaccino, ai developer, salesforce architect, mcp gemini prompt enhancer, mcp documentation server, memogenius, outlook email summarizer, model context protocol, prompt engineering, semantic search, enterprise ai, llm, rag"
 
-  let name = searchParams.get('myQuery')
-  let ogtag
+  // Valori derivati dall'URL: sempre escapati prima di finire nell'HTML
+  const pageUrl = escapeAttr(`${url.origin}${url.pathname}`)
+  const previewImage = escapeAttr(`${url.origin}/img/preview.png`)
 
   // these are the metatags we want to inject into the site
-  ogtag = `
+  const ogtag = `
     <meta property="og:title" content="${metatitle}" />
     <meta property="og:description" content="${metadescription}" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="${request.url}" />
-    <meta property="og:image" content="${request.url}img/preview.png" />
+    <meta property="og:url" content="${pageUrl}" />
+    <meta property="og:image" content="${previewImage}" />
     <meta property="og:image:alt" content="Andrea Bravaccino - AI Developer & Salesforce Architect Portfolio" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:width" content="1200" />
@@ -40,7 +51,7 @@ export async function onRequest(context) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${metatitle}" />
     <meta name="twitter:description" content="${metadescription}" />
-    <meta name="twitter:image" content="${request.url}img/preview.png" />
+    <meta name="twitter:image" content="${previewImage}" />
     <meta name="twitter:image:alt" content="Andrea Bravaccino - AI Developer Portfolio" />
 
     <meta name="description" content="${metadescription}" />
@@ -53,7 +64,7 @@ export async function onRequest(context) {
     <meta name="application-name" content="Andrea Bravaccino Portfolio" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="${request.url}" />
+    <link rel="canonical" href="${pageUrl}" />
   `
 
   return new HTMLRewriter().on('head', new ElementHandler(ogtag)).transform(res)

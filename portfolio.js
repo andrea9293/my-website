@@ -255,16 +255,30 @@ function initChatbot() {
         
         // If it's a bot message, parse markdown, otherwise keep text as is
         if (sender === 'bot') {
-            // Configure marked options for security and styling
-            marked.setOptions({
-                breaks: true,      // Convert line breaks to <br>
-                gfm: true,         // GitHub Flavored Markdown
-                sanitize: false,   // We trust our own content
-                smartypants: true  // Smart quotes and typography
-            });
-            
-            // Parse markdown and set as innerHTML
-            messageDiv.innerHTML = marked.parse(text);
+            const raw = typeof text === 'string' ? text : String(text ?? '');
+
+            if (typeof marked !== 'undefined' && typeof DOMPurify !== 'undefined') {
+                // Configure marked options for styling (marked does NOT sanitize HTML)
+                marked.setOptions({
+                    breaks: true,      // Convert line breaks to <br>
+                    gfm: true,         // GitHub Flavored Markdown
+                    smartypants: true  // Smart quotes and typography
+                });
+
+                // Parse markdown, then sanitize before touching the DOM
+                messageDiv.innerHTML = DOMPurify.sanitize(marked.parse(raw), {
+                    ALLOWED_URI_REGEXP: /^(?:https?|mailto):/i
+                });
+
+                // Force safe link behaviour
+                messageDiv.querySelectorAll('a').forEach((a) => {
+                    a.setAttribute('target', '_blank');
+                    a.setAttribute('rel', 'noopener noreferrer');
+                });
+            } else {
+                // Fail closed: no sanitizer, no HTML
+                messageDiv.textContent = raw;
+            }
         } else {
             // For user messages, keep as plain text
             messageDiv.textContent = text;
