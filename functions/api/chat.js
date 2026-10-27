@@ -289,7 +289,7 @@ export async function onRequestPost(context) {
 
     if (!geminiResponse.ok) {
       console.error(`Gemini API error: ${geminiResponse.status}`);
-      return json({ error: 'Upstream error' }, 502);
+      return json({ error: 'Upstream error' }, 503);
     }
 
     const data = await geminiResponse.json();
@@ -297,7 +297,7 @@ export async function onRequestPost(context) {
 
     if (typeof aiResponse !== 'string' || !aiResponse) {
       console.error('Invalid response shape from Gemini API');
-      return json({ error: 'Invalid upstream response' }, 502);
+      return json({ error: 'Invalid upstream response' }, 503);
     }
 
     return json({ response: aiResponse });
